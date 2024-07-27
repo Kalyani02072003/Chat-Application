@@ -22,10 +22,10 @@ jobs:
         pip install pylint black flake8
 
     - name: Run Pylint
-      run: pylint server.py client.py
+      run: pylint chatServer.py
 
     - name: Run Black
-      run: black --check server.py client.py
+      run: black --check chatServer.py
 
     - name: Run Flake8
-      run: flake8 server.py client.py
+      run: flake8 chatServer.py
