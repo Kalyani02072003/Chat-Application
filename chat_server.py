@@ -48,9 +48,7 @@ async def register(websocket, nickname):
             data = json.loads(message)
             if data.get("type") == "dns":
                 response = await resolve_dns(data["message"])
-                await websocket.send(
-                    json.dumps({"type": "dns", "response": response})
-                    )
+                await websocket.send(json.dumps({"type": "dns", "response": response}))
             else:
                 await broadcast(f"{clients[websocket]}: {data['message']}")
     finally:
