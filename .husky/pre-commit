@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run pylint
+pylint server.py || exit 1
+
+# Run black
+black --check server.py || exit 1
+
+# Run flake8
+flake8 server.py || exit 1

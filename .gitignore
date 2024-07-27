@@ -1,0 +1,22 @@
+# Python
+*.pyc
+__pycache__/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Node
+node_modules/
+package-lock.json
+
+# VSCode
+.vscode/
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# Husky
+.husky/

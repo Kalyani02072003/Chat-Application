@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "venv/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
+    "editor.formatOnSave": true,
+    "ros.distro": "humble"
+}
