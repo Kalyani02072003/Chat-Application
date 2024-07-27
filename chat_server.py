@@ -1,6 +1,8 @@
 """
+
 This module contains a WebSocket server for a chat application.
-It handles client connections, broadcasting messages, and managing nicknames.
+It handles client connections, broadcasting messages, managing nicknames,
+and performs DNS resolution.
 """
 
 import json
@@ -12,10 +14,23 @@ clients = {}
 
 
 async def resolve_dns(domain):
+    """
+    Resolve DNS for a given domain and return a list of IP addresses.
+
+    Args:
+        domain: The domain name to resolve.
+
+    Returns:
+        A list of IP addresses or an error message if the resolution fails.
+    """
     try:
         result = dns.resolver.resolve(domain, 'A')
         return [ip.address for ip in result]
-    except Exception as e:
+    except dns.resolver.NoAnswer as e:
+        return str(e)
+    except dns.resolver.NXDOMAIN as e:
+        return str(e)
+    except dns.exception.DNSException as e:
         return str(e)
 
 
@@ -65,12 +80,15 @@ async def broadcast(message):
 
 
 async def main():
+    """
+    Main function to start the WebSocket server.
+    """
     async def handler(websocket):
         nickname = await websocket.recv()
         await register(websocket, nickname)
 
     async with websockets.serve(handler, "localhost", 5555):
-        await asyncio.Future()
+        await asyncio.Future()  # Run forever
 
 if __name__ == "__main__":
     asyncio.run(main())
