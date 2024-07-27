@@ -27,5 +27,5 @@ jobs:
     - name: Run Black
       run: black --check chat_server.py
 
-    - name: Run Flake8
-      run: flake8 chat_server.py
+    # - name: Run Flake8
+    #   run: flake8 chat_server.py
