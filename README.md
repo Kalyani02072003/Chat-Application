@@ -9,6 +9,7 @@ This project is a chat application with a React.js frontend and a Python WebSock
 - Real-time message broadcasting within rooms.
 - DNS resolution via the chat interface.
 - WebSocket server for real-time communication using Python and `websockets` library.
+- Logging functionality in both frontend and backend.
 - Code quality checks using `pylint` and `black`.
 - Husky configured to run code quality checks on commit.
 
@@ -146,7 +147,11 @@ The code quality is maintained using the following tools:
     - The server performs DNS resolution using the `dns.resolver` module.
     - The WebSocket server echoes IP addresses resolved from DNS queries back to the client.
 
-4. **Husky Configuration:**
+4. **Logging Functionality:**
+
+    - Logging is implemented in both the frontend and backend for easier debugging and monitoring.
+
+5. **Husky Configuration:**
 
     - Husky is configured to run `eslint`, `pylint`, and `black` on commit to ensure code quality.
 
