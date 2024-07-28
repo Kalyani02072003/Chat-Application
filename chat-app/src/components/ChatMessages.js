@@ -29,14 +29,28 @@ const Message = styled.div`
   text-align: ${(props) => (props.isNotification ? 'center' : 'left')};
 `;
 
+const BoldNickname = styled.span`
+  font-weight: bold;
+`;
+
 const ChatMessages = ({ messages, nickname }) => (
   <MessagesContainer>
     {messages.map((message, index) => {
       const isOwnMessage = message.startsWith(`${nickname}:`);
       const isNotification = message.includes('has joined') || message.includes('has left');
+      const [user, ...messageParts] = message.split(':');
+      const formattedMessage = messageParts.join(':');
+
       return (
         <Message key={index} isOwnMessage={isOwnMessage} isNotification={isNotification}>
-          {message}
+          {isNotification ? (
+            message
+          ) : (
+            <>
+              <BoldNickname>{user}:</BoldNickname>
+              {formattedMessage}
+            </>
+          )}
         </Message>
       );
     })}
