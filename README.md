@@ -12,6 +12,17 @@ This project is a chat application with a React.js frontend and a Python WebSock
 - Code quality checks using `pylint` and `black`.
 - Husky configured to run code quality checks on commit.
 
+## Screenshots
+
+### Chat Interface
+
+![Chat Interface](Screenshots/ss2.png)
+![Chat Interface](Screenshots/ss3.png)
+
+### Join Room
+
+![Join Room](Screenshots/ss1.png)
+
 ## Setup and Installation
 
 ### Prerequisites
