@@ -69,6 +69,7 @@ const JoinButton = styled.button`
 
 const JoinChat = ({ connect }) => {
   const [nickname, setNickname] = useState('');
+  const [room, setRoom] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState('');
 
   const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
@@ -86,6 +87,12 @@ const JoinChat = ({ connect }) => {
         onChange={(e) => setNickname(e.target.value)}
         placeholder="Enter your nickname"
       />
+      <Input
+        type="text"
+        value={room}
+        onChange={(e) => setRoom(e.target.value)}
+        placeholder="Enter room name"
+      />
       <AvatarSelection>
         {avatars.map((avatar, index) => (
           <Avatar
@@ -97,7 +104,7 @@ const JoinChat = ({ connect }) => {
           />
         ))}
       </AvatarSelection>
-      <JoinButton onClick={() => connect(nickname, selectedAvatar)}>Join Chat</JoinButton>
+      <JoinButton onClick={() => connect(nickname, selectedAvatar, room)}>Join Chat</JoinButton>
     </JoinContainer>
   );
 };

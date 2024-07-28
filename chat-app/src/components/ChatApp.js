@@ -28,14 +28,19 @@ const ChatBox = styled.div`
   flex-direction: column;
   height: 80vh;
   overflow: hidden;
+  position: relative;
 `;
 
 const Header = styled.div`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: space-between;
   padding: 10px;
-  gap:10px;
+`;
+
+const UserSection = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Avatar = styled.img`
@@ -45,62 +50,79 @@ const Avatar = styled.img`
   margin-right: 10px;
 `;
 
+const Nickname = styled.span`
+  font-weight: bold;
+`;
+
+const RoomName = styled.span`
+  font-size: 14px;
+  color: #222222;
+  position: absolute;
+  top: 35px;
+  right: 20px;
+`;
+
 const ChatApp = () => {
-    const [messages, setMessages] = useState([]);
-    const [nickname, setNickname] = useState('');
-    const [isConnected, setIsConnected] = useState(false);
-    const [avatar, setAvatar] = useState('');
-    const socket = useRef(null);
+  const [messages, setMessages] = useState([]);
+  const [nickname, setNickname] = useState('');
+  const [room, setRoom] = useState('');
+  const [isConnected, setIsConnected] = useState(false);
+  const [avatar, setAvatar] = useState('');
+  const socket = useRef(null);
 
-    useEffect(() => {
-        return () => {
-        if (socket.current) {
-            socket.current.close();
-        }
-        };
-    }, []);
+  useEffect(() => {
+    return () => {
+      if (socket.current) {
+        socket.current.close();
+      }
+    };
+  }, []);
 
-    const connect = (nickname, selectedAvatar) => {
-        setAvatar(selectedAvatar);
+  const connect = (nickname, selectedAvatar, room) => {
+    setAvatar(selectedAvatar);
 
-        socket.current = new WebSocket('ws://localhost:5555');
-        socket.current.onopen = () => {
-        socket.current.send(nickname);
-        setIsConnected(true);
-        setNickname(nickname);
-        };
-
-        socket.current.onmessage = (event) => {
-        setMessages((prevMessages) => [...prevMessages, event.data]);
-        };
-
-        socket.current.onclose = () => {
-        console.log('WebSocket connection closed');
-        };
+    socket.current = new WebSocket('ws://localhost:5555');
+    socket.current.onopen = () => {
+      socket.current.send(JSON.stringify({ nickname, room }));
+      setIsConnected(true);
+      setNickname(nickname);
+      setRoom(room);
     };
 
-    const sendMessage = (message) => {
-        if (message.trim() && socket.current) {
-        socket.current.send(JSON.stringify({ message }));
-        }
+    socket.current.onmessage = (event) => {
+      setMessages((prevMessages) => [...prevMessages, event.data]);
     };
 
-    return (
-        <AppContainer>
-        {!isConnected ? (
-            <JoinChat connect={connect} />
-        ) : (
-            <ChatBox>
-            <Header>
-                <span>{nickname}</span>
-                <Avatar src={avatar} alt="Avatar" />
-            </Header>
-            <ChatMessages messages={messages} nickname={nickname} />
-            <MessageInput sendMessage={sendMessage} />
-            </ChatBox>
-        )}
-        </AppContainer>
-    );
+    socket.current.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+  };
+
+  const sendMessage = (message) => {
+    if (message.trim() && socket.current) {
+      socket.current.send(JSON.stringify({ message }));
+    }
+  };
+
+  return (
+    <AppContainer>
+      {!isConnected ? (
+        <JoinChat connect={connect} />
+      ) : (
+        <ChatBox>
+          <Header>
+            <UserSection>
+              <Avatar src={avatar} alt="Avatar" />
+              <Nickname>{nickname}</Nickname>
+            </UserSection>
+            <RoomName>Room Joined: {room}</RoomName>
+          </Header>
+          <ChatMessages messages={messages} nickname={nickname} />
+          <MessageInput sendMessage={sendMessage} />
+        </ChatBox>
+      )}
+    </AppContainer>
+  );
 };
 
 export default ChatApp;
