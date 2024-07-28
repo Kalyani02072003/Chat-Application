@@ -51,6 +51,10 @@ async def register(websocket, nickname, room):
             if data.get("type") == "dns":
                 response = await resolve_dns(data["message"])
                 await websocket.send(json.dumps({"type": "dns", "response": response}))
+            elif data.get("type") == "echo":
+                # Extract the client's IP address and send it back
+                client_ip = websocket.remote_address[0]
+                await websocket.send(json.dumps({"type": "echo", "response": client_ip}))
             else:
                 await broadcast(f"{clients[room][websocket]}: {data['message']}", room)
     finally:
