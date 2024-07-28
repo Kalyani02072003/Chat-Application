@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import log from '../logger';
 
 const MessagesContainer = styled.div`
   width: 100%;
@@ -29,32 +30,22 @@ const Message = styled.div`
   text-align: ${(props) => (props.isNotification ? 'center' : 'left')};
 `;
 
-const BoldNickname = styled.span`
-  font-weight: bold;
-`;
+const ChatMessages = ({ messages, nickname }) => {
+  log.debug('Rendering ChatMessages component with messages:', messages);
 
-const ChatMessages = ({ messages, nickname }) => (
-  <MessagesContainer>
-    {messages.map((message, index) => {
-      const isOwnMessage = message.startsWith(`${nickname}:`);
-      const isNotification = message.includes('has joined') || message.includes('has left');
-      const [user, ...messageParts] = message.split(':');
-      const formattedMessage = messageParts.join(':');
-
-      return (
-        <Message key={index} isOwnMessage={isOwnMessage} isNotification={isNotification}>
-          {isNotification ? (
-            message
-          ) : (
-            <>
-              <BoldNickname>{user}:</BoldNickname>
-              {formattedMessage}
-            </>
-          )}
-        </Message>
-      );
-    })}
-  </MessagesContainer>
-);
+  return (
+    <MessagesContainer>
+      {messages.map((message, index) => {
+        const isOwnMessage = message.startsWith(`${nickname}:`);
+        const isNotification = message.includes('has joined') || message.includes('has left');
+        return (
+          <Message key={index} isOwnMessage={isOwnMessage} isNotification={isNotification}>
+            {message}
+          </Message>
+        );
+      })}
+    </MessagesContainer>
+  );
+};
 
 export default ChatMessages;

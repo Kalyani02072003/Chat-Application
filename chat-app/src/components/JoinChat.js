@@ -104,7 +104,9 @@ const JoinChat = ({ connect }) => {
           />
         ))}
       </AvatarSelection>
-      <JoinButton onClick={() => connect(nickname, selectedAvatar, room)}>Join Chat</JoinButton>
+      <JoinButton onClick={() => connect(nickname, selectedAvatar, room)}>
+        Join Chat
+      </JoinButton>
     </JoinContainer>
   );
 };

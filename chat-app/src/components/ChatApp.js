@@ -4,6 +4,7 @@ import ChatMessages from './ChatMessages';
 import MessageInput from './MessageInput';
 import JoinChat from './JoinChat';
 import bgimg from '../assets/background.jpg';
+import log from '../logger';
 
 const AppContainer = styled.div`
   display: flex;
@@ -87,20 +88,23 @@ const ChatApp = () => {
       setIsConnected(true);
       setNickname(nickname);
       setRoom(room);
+      log.info('Connected to WebSocket server');
     };
 
     socket.current.onmessage = (event) => {
       setMessages((prevMessages) => [...prevMessages, event.data]);
+      log.debug('Received message:', event.data);
     };
 
     socket.current.onclose = () => {
-      console.log('WebSocket connection closed');
+      log.warn('WebSocket connection closed');
     };
   };
 
   const sendMessage = (message) => {
     if (message.trim() && socket.current) {
       socket.current.send(JSON.stringify({ message }));
+      log.debug('Sent message:', message);
     }
   };
 
