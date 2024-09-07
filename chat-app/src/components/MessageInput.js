@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import log from '../logger';
 
 const InputContainer = styled.div`
   display: flex;
@@ -36,7 +35,7 @@ const MessageInput = ({ sendMessage }) => {
 
   const handleSendMessage = () => {
     sendMessage(message);
-    log.debug('Message sent:', message);
+    // log.debug('Message sent:', message);
     setMessage('');
   };
 

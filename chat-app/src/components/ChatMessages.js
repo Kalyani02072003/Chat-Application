@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import log from '../logger';
 
 const MessagesContainer = styled.div`
   width: 100%;
@@ -31,7 +30,7 @@ const Message = styled.div`
 `;
 
 const ChatMessages = ({ messages, nickname }) => {
-  log.debug('Rendering ChatMessages component with messages:', messages);
+  
 
   return (
     <MessagesContainer>

@@ -125,8 +125,8 @@ async def main():
         logger.info("New connection: %s in room %s", data["nickname"], data["room"])
         await register(websocket, data["nickname"], data["room"])
 
-    async with websockets.serve(handler, "localhost", 5555):
-        logger.info("Server started on ws://localhost:5555")
+    async with websockets.serve(handler, "0.0.0.0", 5555):
+        logger.info("Server started on ws://l0.0.0.0:5555")
         await asyncio.Future()  # Run forever
 
 
