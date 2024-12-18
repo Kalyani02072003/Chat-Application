@@ -1,0 +1,49 @@
+{
+<<<<<<< HEAD
+  "name": "chat-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@sentry/react": "^8.20.0",
+    "@sentry/tracing": "^7.114.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "loglevel": "^1.9.1",
+    "loglevel-plugin-prefix": "^0.8.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.25.1",
+    "react-scripts": "5.0.1",
+    "styled-components": "^6.1.13",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+=======
+  "devDependencies": {
+    "husky": "^9.1.3"
+>>>>>>> 53d1bc794c3a1ea12a35d76f1ca873d38269b99d
+  }
+}

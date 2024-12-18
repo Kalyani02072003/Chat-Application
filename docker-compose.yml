@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  chat-app:
+    build:
+      context: ./chat-app
+      dockerfile: Dockerfile
+    container_name: chat-app2
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network2
+    depends_on:
+      - flask-app
+
+  flask-app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: flask-app
+    ports:
+      - "5555:5555"
+    networks:
+      - app-network2
+    extra_hosts:
+      - "localhost:host-gateway"  # Corrected indentation for extra_hosts
+
+networks:
+  app-network2:
+    driver: bridge  # Default mode for localhost access
