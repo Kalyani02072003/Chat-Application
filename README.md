@@ -2,6 +2,7 @@
 
 This project is a chat application with a React.js frontend and a Python WebSocket backend. The application allows users to join different chat rooms, choose a nickname, select an avatar, and send messages to other users in the same room. Additionally, it includes DNS resolution functionality.
 
+Chat App is live on https://chat-app0207.vercel.app/
 ## Features
 
 - Users can join different chat rooms.
