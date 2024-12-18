@@ -81,7 +81,7 @@ const ChatApp = () => {
   const connect = (nickname, selectedAvatar, room) => {
     setAvatar(selectedAvatar);
 
-    socket.current = new WebSocket('ws://localhost:5555');
+    socket.current = new WebSocket('https://chat-application-7zpt.onrender.com/');
     socket.current.onopen = () => {
       socket.current.send(JSON.stringify({ nickname, room }));
       // console.log(room)
